@@ -17,7 +17,7 @@ function createBookmark() {
     name: bookmarkName.value,
     URL: bookmarkURL.value,
   };
-  if ( siteNameRegex.test(newBookmark.name) | siteURLRegex.test(newBookmark.URL) ) {
+  if ( siteNameRegex.test(newBookmark.name) && siteURLRegex.test(newBookmark.URL) ) {
     allBookmarks.push(newBookmark);
     displayBookmarks(allBookmarks);
     clearValues();
