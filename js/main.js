@@ -16,11 +16,16 @@ function createBookmark() {
   };
   allBookmarks.push(newBookmark);
   displayBookmarks(allBookmarks);
+  clearValues();
   localStorage.setItem('allBookmarks', JSON.stringify(allBookmarks));
   // console.log(allBookmarks);
 }
 
 
+function clearValues(){
+  bookmarkName.value = '';
+  bookmarkURL.value = '';
+}
 
 // 2. display info in table
 
@@ -47,7 +52,7 @@ function displayBookmarks(arr) {
         </button>
       </td>
       <td>
-        <button id='visitBtn' class="btn btn-danger">Delete</button>
+        <button id='visitBtn' class="btn btn-danger" onclick='deleteBookmark(${i})' >Delete</button>
       </td>
     </tr>`
   }
@@ -70,6 +75,17 @@ if (localStorage.getItem('allBookmarks')){
 // the reason i need << displayBookmarks(allBookmarks); >> in createBookmark()
 //    is to display new entry after submission
 // the table would not be displayed if the condition statement was in createBookmark()
+
+
+
+/* ********* function to delete bookmark ********* */
+function deleteBookmark(bookmarkIndex){
+  allBookmarks.splice(bookmarkIndex, 1);
+  localStorage.setItem('allBookmarks', JSON.stringify(allBookmarks));
+  displayBookmarks(allBookmarks);
+}
+
+
 
 
 
