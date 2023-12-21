@@ -1,0 +1,110 @@
+/* ********* function to store bookmark info in table ********* */
+// 1. store info in object
+
+// need to grab elements from document for use
+let bookmarkName = document.getElementById("bookmarkName");
+let bookmarkURL = document.getElementById("bookmarkURL");
+
+// need global array to store objects in
+let allBookmarks = [];
+
+// function to store new object in array
+function createBookmark() {
+  let newBookmark = {
+    name: bookmarkName.value,
+    URL: bookmarkURL.value,
+  };
+  allBookmarks.push(newBookmark);
+  displayBookmarks(allBookmarks);
+  localStorage.setItem('allBookmarks', JSON.stringify(allBookmarks));
+  // console.log(allBookmarks);
+}
+
+
+
+// 2. display info in table
+
+
+//function to create table body html code 
+
+function displayBookmarks(arr) {
+  // need html string to use with .innerTHML
+  // not global bc we iterate anew each time
+  let tableBodyString = "";
+
+  for (let i = 0; i < arr.length; i++) {
+    tableBodyString +=  `
+    <tr>
+      <td>
+        ${i+1}
+      </td>
+      <td>
+        ${arr[i].name}
+      </td>
+      <td>
+        <button id='visitBtn' class="btn btn-warning">
+          <a class="text-decoration-none text-black" target='_blank' href="${arr[i].URL}">Visit</a>
+        </button>
+      </td>
+      <td>
+        <button id='visitBtn' class="btn btn-danger">Delete</button>
+      </td>
+    </tr>`
+  }
+  document.getElementById('tableBody').innerHTML = tableBodyString;
+
+}
+
+
+
+// want to always display whats stored even after refreshing
+if (localStorage.getItem('allBookmarks')){
+  // well, what do i have stored?
+  allBookmarks = JSON.parse(localStorage.getItem('allBookmarks'));
+  // ok, display it
+  displayBookmarks(allBookmarks);
+} else {
+  allBookmarks = [];
+}
+// the point of this is to display upon refreshing
+// the reason i need << displayBookmarks(allBookmarks); >> in createBookmark()
+//    is to display new entry after submission
+// the table would not be displayed if the condition statement was in createBookmark()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
